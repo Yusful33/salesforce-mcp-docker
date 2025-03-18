@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  salesforce-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: salesforce-mcp-server
+    restart: unless-stopped
+    environment:
+      - SF_LOGIN_URL=${SF_LOGIN_URL:-https://login.salesforce.com}
+      - SF_USERNAME=${SF_USERNAME}
+      - SF_PASSWORD=${SF_PASSWORD}
+      - SF_SECURITY_TOKEN=${SF_SECURITY_TOKEN}
+    volumes:
+      - ./config:/app/config
+    tty: true
+    stdin_open: true
